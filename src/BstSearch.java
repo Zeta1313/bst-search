@@ -1,3 +1,5 @@
+import javax.swing.tree.TreeNode;
+
 public class BstSearch {
     /**
      * Returns whether a binary search tree contains a given value.
@@ -17,6 +19,17 @@ public class BstSearch {
      * @throws NullPointerException if target is null
      */
     public static <T extends Comparable<T>> boolean contains(BinaryTreeNode<T> root, T target) {
-        return false;
+        if (target == null) throw new NullPointerException();
+        if (root == null) return false;
+        if (root.data == target) return true;
+        if (containsHelper(root.left, target) || containsHelper(root.right, target)) return true;
+        else return false;
+    }
+
+    private static <T extends Comparable<T>> boolean containsHelper(BinaryTreeNode<T> root, T target) { 
+        if (root == null) return false;
+        if (root.data == target) return true;
+        if (containsHelper(root.left, target) || containsHelper(root.right, target)) return true;
+        else return false;
     }
 }
